@@ -1,0 +1,87 @@
+/**
+ * ----------------------------------------------------------------------------
+ * #.# Frontend CSS
+ *
+ * BLOCK: 03-block-editable block CSS for the frontend.
+ * ----------------------------------------------------------------------------
+ */
+
+ .bk-button{
+ 	//display:inline-block;
+ 	padding-top:8px;
+ 	padding-bottom:8px;
+	.editor-url-input{
+		display:inline-block;
+		width:auto !important;
+		padding:10px !important;
+	}
+	.componenbk-button{
+		display:inline-block;
+	}
+ }	
+ .componenbk-autocomplete{
+ 	//display:inline-block;
+ }
+ .bk-button-wrapper{
+ 	position:relative;
+ 	.editor-rich-text{
+ 		display: inline-block;
+ 	}
+ }
+ .bk-connector{
+ 	&:before{
+	 	position: absolute;
+	    z-index: 16;
+	    right: 0;
+	    background: #000;
+	    top:0;
+	    left: 156px;
+	    width: 3px;
+	    height: 100%;
+	    text-align: center;
+	    line-height: 30px;
+	    overflow: hidden;
+	    opacity: 1;
+	    border-width: 2px 2px 2px 2px !important;
+	  }  
+ }
+ .bk-button-plus{
+	border: none;
+	border-radius: 4px;
+	box-shadow: none !important;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 1em !important;
+	margin: 0;
+	text-decoration: none !important;
+	white-space: nowrap;
+	display: inline-block;
+	opacity: 1;
+	background: #2091e1;
+	color: #fff;
+	padding: 0.75em 1em;
+	transition: opacity .2s ease-in-out;
+	box-shadow: none !important;
+	&:hover {
+		opacity: .85;
+		box-shadow: none !important;
+		border: 0;
+	}
+}
+.bk-btn-form{
+	.components-button,.components-icon-button{
+  	display: inline-block;
+  }	
+}
+.is-none{display:none;}
+.is-inline-block{display:inline-block;}
+.bk-square{ border-radius:0; }
+.bk-rounded{ border-radius:10px; }
+.bk-circular{ border-radius:20px; }
+.bk-extra-circular{ border-radius:40px; }
+.bk-small {font-size: 14px;}
+.bk-normal {font-size: 16px;}
+.bk-medium {font-size: 20px;}
+.bk-large {font-size: 26px;padding: .8em 1.2em;}
+.bk-extra-large {font-size: 34px;padding: .8em 1.2em;}
+

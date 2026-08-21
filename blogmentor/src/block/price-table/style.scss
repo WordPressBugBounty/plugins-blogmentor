@@ -1,0 +1,178 @@
+/**
+ * ## Styles for Pricing Box Block.
+ *
+ * CSS for both Frontend+Backend.
+ */
+ .editor-rich-text{
+ 	display:block;
+ }
+ h1,h2,h3,h4,h5,h6{
+		margin-bottom:0;
+	}
+	p{
+		margin-bottom:0;
+	}
+.bk-pricing-box {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+form{
+ 	display: inline-flex;
+ 	width: 100%;
+ }
+	.box-item{
+		-ms-flex-preferred-size: 0;
+	    flex-basis: 0;
+	    -ms-flex-positive: 1;
+	    flex-grow: 1;
+	    margin: 0.75rem;
+	    max-width: 100%;
+	}
+	.box-head{
+			padding:2rem;
+		}	
+	.bk-box-btn{
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		margin-bottom: 2rem;
+	}
+	.box-button{
+		padding-bottom: 2rem;
+		padding-left: 0.5rem;
+		padding-right:0.5rem;
+	}
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	> div {
+		text-align: center;
+		margin: 0 auto;
+		p {
+			text-align: center;
+			padding-bottom: 0;
+		}
+	}
+	h3 {
+	 	margin: 0 0 2rem !important;
+		line-height: 100% !important;
+	}
+	.bk-pricing-box-pricing {
+		font-size: 3.5em !important;
+		margin: 0 0 .5rem;
+		line-height: 100% !important;
+	}
+	.bk-pricing-box-per-month-label {
+		font-size: .75em;
+		margin: 0 0 1rem;
+		text-transform: uppercase;
+		line-height: 100% !important;
+	}
+	.wp-bk-button {
+		margin-bottom: 2rem;
+		padding:1rem 2rem;
+	}
+	.bk-pricing-box-feature-list-one,
+	.bk-pricing-box-feature-list-two,
+	.bk-pricing-box-feature-list-three {
+		// padding-top:2rem;
+		padding-bottom:2rem;
+		padding-right: 0.5rem;
+		padding-left: 0.5rem;
+		margin: 0;
+		li{
+			list-style:none;
+		}
+	  }
+
+}
+.blocks-button__inline-link.pricing-box {
+	margin: 5px auto 0px auto;
+}
+.bk-pricing-box.column-1 {
+	.bk-pricing-box-column-one {
+		form{
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	}
+	.bk-pricing-box-column-two,
+	.bk-pricing-box-column-three {
+		display: none;
+	}
+}
+.bk-pricing-box.column-2 {
+	.bk-pricing-box-feature-list {
+		margin: 0 auto;
+	}
+
+	.bk-pricing-box-column-two {
+	    margin-left: 0;
+	}
+	> div {
+		width: 50%;
+	}
+	.bk-pricing-box-column-three {
+		display: none;
+	}
+	.blocks-button__inline-link {
+		width: 225px;
+	}
+}
+.bk-pricing-box.column-3 {
+	> div {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+	> div:first-child {
+		margin-left: 0;
+	}
+	> div:last-child {
+		margin-right: 0;
+	}
+	.bk-pricing-box-column-two {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.bk-pricing-box-feature-list {
+		width: 100%;
+	}
+	.blocks-button__inline-link {
+		width: 181px;
+		.blocks-url-input {
+			width: 50%;
+		}
+	}
+}
+@media (min-width: 600px){
+	.bk-pricing-box{
+		display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	    -ms-flex: 0 1 auto;
+	    flex: 0 1 auto;
+	    flex-flow: row wrap;
+	    margin: -0.75rem;
+	    position: relative;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.bk-pricing-box.column-3.column-3 {
+		display: block;
+		> div {
+			width: 100%;
+			margin: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.bk-pricing-box.column-2.column-2 {
+		display: block;
+		> div {
+			width: 100%;
+			margin: 0;
+		}
+	}
+}

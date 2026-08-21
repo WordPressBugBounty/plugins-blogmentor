@@ -1,0 +1,166 @@
+/**
+ * #.# Styles for CTA Block.
+ *
+ * CSS for both Frontend+Backend.
+ */
+ .bk-infobox-col-one{height:100%;}
+.bk-infobox{
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	.box-item{
+		-ms-flex-preferred-size: 0;
+	    flex-basis: 0;
+	    -ms-flex-positive: 1;
+	    flex-grow: 1;
+	    margin: 0.25rem;
+	    max-width: 100%;
+	}	
+  .infobox-image {
+		width: 350px;
+	    height: 350px;
+	    background-size: cover;
+	    background-position: center;
+		margin: 0 auto 1.3rem;
+	}
+	&.column-2 {
+		.infobox-image {
+			width: 220px;
+	    	height: 220px;
+		}
+	}
+	&.column-3 {
+		.infobox-image {
+			width: 160px;
+		    height: 180px;
+		}
+	}
+	&.column-4 {
+		.infobox-image {
+			width: 120px;
+	    	height: 120px;
+		}
+	}
+	&.column-5 {
+		.infobox-image {
+			width: 100px;
+	    	height: 100px;
+		}
+	}
+	&.column-6 {
+		.infobox-image {
+			width: 100px;
+	    	height: 100px;
+		}
+	}
+	.bk-infobox-desc,
+	.bk-infobox-descTwo,
+	.bk-infobox-descThree,
+	.bk-infobox-descFour,
+	.bk-infobox-descFive,
+	.bk-infobox-descSix {
+		 margin: 0 0 1rem;
+		 left: 0;
+	 }	
+}	
+.bk-infobox.column-1 {
+	.bk-infobox-col-two,
+	.bk-infobox-col-three,
+	.bk-infobox-col-four,
+	.bk-infobox-col-five,
+	.bk-infobox-col-six {
+		display: none;
+	}
+}
+.bk-infobox.column-2 {
+	.bk-infobox-col-one,
+	.bk-infobox-col-two {
+		width: 50%;
+	}
+	.bk-infobox-col-three,
+	.bk-infobox-col-four,
+	.bk-infobox-col-five,
+	.bk-infobox-col-six {
+		display: none;
+	}
+	.team-member-image img {
+		height: 200px;
+		width: 250px
+	}
+}
+.bk-infobox.column-3{
+	.bk-infobox-col-one,
+	.bk-infobox-col-two,
+	.bk-infobox-col-three {
+		width: 33.33%;
+	}
+	.bk-infobox-col-four,
+	.bk-infobox-col-five,
+	.bk-infobox-col-six {
+		display: none;
+	}
+	.infobox-image img {
+		height: 200px;
+		width: 200px
+	}
+}
+.bk-infobox.column-4{
+	.bk-infobox-col-one,
+	.bk-infobox-col-two,
+	.bk-infobox-col-three
+	.bk-infobox-col-four {
+		max-width: 25%;
+	}
+	.bk-infobox-col-five,
+	.bk-infobox-col-six {
+		display: none;
+	}
+	.infobox-image img {
+		height: 150px;
+		width: 150px
+	}
+}
+.bk-infobox.column-5{
+	.bk-infobox-col-one,
+	.bk-infobox-col-two,
+	.bk-infobox-col-three,
+	.bk-infobox-col-four,
+	.bk-infobox-col-five {
+		width: 19.333337%;
+	}
+	.bk-infobox-col-six {
+		display: none;
+	}
+	.infobox-image img {
+		height: 150px;
+		width: 150px
+	}
+}
+.bk-infobox.column-6{
+	.bk-infobox-col-one,
+	.bk-infobox-col-two,
+	.bk-infobox-col-three,
+	.bk-infobox-col-four,
+	.bk-infobox-col-five,
+	.bk-infobox-col-six {
+		width: 16.666667%;
+	}
+	.infobox-image img {
+		height: 150px;
+		width: 150px
+	}
+}
+
+@media (min-width: 600px){
+	.bk-infobox {
+		display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	    -ms-flex: 0 1 auto;
+	    flex: 0 1 auto;
+	    margin: -0.75rem;
+	    position: relative;
+	}
+}

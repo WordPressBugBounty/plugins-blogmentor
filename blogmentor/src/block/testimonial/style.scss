@@ -1,0 +1,50 @@
+/**
+ * #.# Styles for CTA Block.
+ *
+ * CSS for both Frontend+Backend.
+ */
+.bk-testimonial {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	padding:2rem;
+	.testimonial-inner{
+		display: inline-block;
+		.testimonial-img,.testimonial-detail{
+			h4{ margin: 0 }
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.testimonial-detail{
+			padding-left: 0.5rem;
+		}	
+	}
+	.testimonial-image {
+		height: 75px;
+		width: 75px;
+		border-radius: 100%;
+	}
+	img{
+	    height: 75px;
+		width: 75px;
+		border-radius: 100%;
+	}
+	.quote-icon {
+		height: 75px;
+		display: flex;
+	    justify-content: center;
+	    align-items: center;
+		svg {
+			height: 50px;
+			width: auto;
+			fill: #e6e6e6;
+		}
+	}
+	> div {
+		text-align: center;
+		padding: 1rem 0;
+		margin: 0 auto;
+	}
+	h4 {
+	 	margin: 0 0 .5rem !important;
+	}
+}

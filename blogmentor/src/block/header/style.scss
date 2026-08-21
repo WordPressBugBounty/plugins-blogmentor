@@ -1,0 +1,19 @@
+/**
+ * #.# Styles for CTA Block.
+ *
+ * CSS for both Frontend+Backend.
+ */
+.bk-heading {
+	margin-top:2rem;
+	margin-bottom:2rem;
+	.bk-dotted{ border: dotted; }
+	.bk-dashed{border: dashed;}
+	.bk-double{border: double;}
+	.bk-solid{border: solid;}
+	.bk-groove{border: groove;}
+	.bk-ridge{border: ridge;}
+	.bk-inset{border: inset;}
+	.bk-outset{border: outset;}
+	.bk-none{border: none;}
+	.bk-heading-body{padding: 0.5rem;}
+}

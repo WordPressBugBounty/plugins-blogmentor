@@ -1,0 +1,44 @@
+/**
+ * #.# Styles for CTA Block.
+ *
+ * CSS for both Frontend+Backend.
+ */
+.bk-author {
+	h2,h6{
+		margin: 0;
+	}
+	padding: 2rem;
+	.is-none{ display: none; }
+	.is-inline{ display:block; }	
+	.bk-author-column-one{
+		align-items: flex-start;
+	    display: -ms-flexbox;
+	    display: flex;
+	    position: relative;
+	    border-radius: 4px;
+	    word-break: break-word;
+	}
+	.fab{
+		padding: 0.5rem;
+		margin-right: 0.5rem
+	}
+	.author-detail{
+		padding-bottom: 1rem;
+	}
+	.author-img{ 
+			margin-right: 1.5rem;
+			flex: 0 0 auto;	
+		   img {
+			height: 150px;
+			width: 150px;
+		  }	
+		}
+}
+@media (min-width: 600px){
+	.bk-author{
+		.author-img {
+		    width: 150px;
+		    height: 150px;
+		}
+	}
+ }	

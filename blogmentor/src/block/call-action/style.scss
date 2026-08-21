@@ -1,0 +1,32 @@
+/**
+ * #.# Styles for CTA Block.
+ *
+ * CSS for both Frontend+Backend.
+ */
+.bk-cta{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	padding: 2rem;
+	.bk-cta-wrapper{
+
+	}
+.bk-button-wrapper{
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+.bk-button-wrapper{
+ 	position:relative;
+ 	.editor-rich-text{
+ 		display: inline-block;
+ 	}
+ }
+.bk-square{ border-radius:0; }
+.bk-rounded{ border-radius:10px; }
+.bk-circular{ border-radius:20px; }
+.bk-extra-circular{ border-radius:40px; }
+.bk-small {font-size: 14px;}
+.bk-normal {font-size: 16px;}
+.bk-medium {font-size: 20px;}
+.bk-large {font-size: 26px;padding: .8em 1.2em;}
+.bk-extra-large {font-size: 34px;padding: .8em 1.2em;}	
+}
