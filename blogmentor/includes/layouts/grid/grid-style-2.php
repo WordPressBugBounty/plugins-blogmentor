@@ -62,7 +62,7 @@ while ( $blog_posts->have_posts() ) :
 						} else {
 							$blogmentor_read_more = '';
 						}
-							echo wp_kses_post( wp_trim_words( $blogmentor_content, $settings['excerpt_length'], $blogmentor_read_more ) );
+							echo wp_kses_post( wp_trim_words( strip_shortcodes( $blogmentor_content ), $settings['excerpt_length'], $blogmentor_read_more ) );
 					}
 					?>
 					</div>

@@ -74,11 +74,11 @@ while ( $blog_posts->have_posts() ) :
 					}
 					if ( isset( $settings['show_read_more'] ) && 'yes' === $settings['show_read_more'] ) {
 						$blogmentor_read_more_text = empty( $settings['read_more_text'] ) ? __( 'Read More »', 'blogmentor' ) : $settings['read_more_text'];
-						$blogmentor_read_more      = ' <div><a href="' . esc_url( get_permalink() ) . '" rel="bookmark" class="bm-read-more entry-read-more">' . esc_html( $blogmentor_read_more_text ) . '</a><div>';
+						$blogmentor_read_more      = ' <div><a href="' . esc_url( get_permalink() ) . '" rel="bookmark" class="bm-read-more entry-read-more">' . esc_html( $blogmentor_read_more_text ) . '</a></div>';
 					} else {
 						$blogmentor_read_more = '';
 					}
-						echo wp_kses_post( wp_trim_words( $blogmentor_content, $settings['excerpt_length'], $blogmentor_read_more ) );
+						echo wp_kses_post( wp_trim_words( strip_shortcodes( $blogmentor_content ), $settings['excerpt_length'], $blogmentor_read_more ) );
 				}
 				?>
 			</div>

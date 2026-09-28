@@ -40,15 +40,7 @@ $blogmentor_i              = 0;
 					echo '<div class="upl-title bm_title">' . wp_kses_post( $blogmentor_title_link ) . '</div>';
 				}
 				if ( isset( $settings['show_metro_excerpt'] ) && 'yes' === $settings['show_metro_excerpt'] ) {
-					$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-
-					if ( isset( $settings['metro_excerpt_from'] ) && 'excerpt' === $settings['metro_excerpt_from'] ) {
-						if ( ! empty( $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt ) ) {
-							$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt;
-						}
-					} else {
-						$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-					}
+					$blogmentor_content = blogmentor_get_post_text( $blogmentor_upl_all_post[ $blogmentor_i ], isset( $settings['metro_excerpt_from'] ) ? $settings['metro_excerpt_from'] : 'content' );
 
 					if ( isset( $settings['show_metro_read_more'] ) && 'yes' === $settings['show_metro_read_more'] ) {
 						$blogmentor_metro_read_more_text = empty( $settings['metro_metro_read_more_text'] ) ? __( 'Read More »', 'blogmentor' ) : $settings['metro_metro_read_more_text'];
@@ -122,14 +114,7 @@ $blogmentor_i              = 0;
 						echo '<div class="upl-title bm_title">' . wp_kses_post( $blogmentor_title_link ) . '</div>';
 					}
 					if ( isset( $settings['show_metro_excerpt'] ) && 'yes' === $settings['show_metro_excerpt'] ) {
-						$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-						if ( isset( $settings['metro_excerpt_from'] ) && 'excerpt' === $settings['metro_excerpt_from'] ) {
-							if ( ! empty( $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt ) ) {
-								$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt;
-							}
-						} else {
-							$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-						}
+						$blogmentor_content = blogmentor_get_post_text( $blogmentor_upl_all_post[ $blogmentor_i ], isset( $settings['metro_excerpt_from'] ) ? $settings['metro_excerpt_from'] : 'content' );
 						if ( isset( $settings['show_metro_read_more'] ) && 'yes' === $settings['show_metro_read_more'] ) {
 							$blogmentor_metro_read_more_text = empty( $settings['metro_read_more_text'] ) ? __( 'Read More »', 'blogmentor' ) : $settings['metro_read_more_text'];
 							$blogmentor_read_more            = ' <a href="' . esc_url( get_permalink( $blogmentor_upl_all_post[ $blogmentor_i ]->ID ) ) . '" rel="bookmark" class="entry-read-more">' . esc_html( $blogmentor_metro_read_more_text ) . '</a>';
@@ -197,15 +182,7 @@ $blogmentor_i              = 0;
 						echo '<div class="upl-title bm_title">' . wp_kses_post( $blogmentor_title_link ) . '</div>';
 					}
 					if ( isset( $settings['show_metro_excerpt'] ) && 'yes' === $settings['show_metro_excerpt'] ) {
-						$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-
-						if ( isset( $settings['metro_excerpt_from'] ) && 'excerpt' === $settings['metro_excerpt_from'] ) {
-							if ( ! empty( $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt ) ) {
-								$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt;
-							}
-						} else {
-							$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-						}
+						$blogmentor_content = blogmentor_get_post_text( $blogmentor_upl_all_post[ $blogmentor_i ], isset( $settings['metro_excerpt_from'] ) ? $settings['metro_excerpt_from'] : 'content' );
 
 						if ( isset( $settings['show_metro_read_more'] ) && 'yes' === $settings['show_metro_read_more'] ) {
 							$blogmentor_metro_read_more_text = empty( $settings['metro_read_more_text'] ) ? __( 'Read More »', 'blogmentor' ) : $settings['metro_read_more_text'];
@@ -281,14 +258,7 @@ $blogmentor_i              = 0;
 				}
 
 				if ( isset( $settings['show_metro_excerpt'] ) && 'yes' === $settings['show_metro_excerpt'] ) {
-					$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-					if ( isset( $settings['metro_excerpt_from'] ) && 'excerpt' === $settings['metro_excerpt_from'] ) {
-						if ( ! empty( $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt ) ) {
-							$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_excerpt;
-						}
-					} else {
-						$blogmentor_content = $blogmentor_upl_all_post[ $blogmentor_i ]->post_content;
-					}
+					$blogmentor_content = blogmentor_get_post_text( $blogmentor_upl_all_post[ $blogmentor_i ], isset( $settings['metro_excerpt_from'] ) ? $settings['metro_excerpt_from'] : 'content' );
 					if ( isset( $settings['show_metro_read_more'] ) && 'yes' === $settings['show_metro_read_more'] ) {
 						$blogmentor_metro_read_more_text = empty( $settings['metro_read_more_text'] ) ? __( 'Read More »', 'blogmentor' ) : $settings['metro_read_more_text'];
 						$blogmentor_read_more            = ' <a href="' . esc_url( get_permalink( $blogmentor_upl_all_post[ $blogmentor_i ]->ID ) ) . '" rel="bookmark" class="entry-read-more">' . esc_html( $blogmentor_metro_read_more_text ) . '</a>';

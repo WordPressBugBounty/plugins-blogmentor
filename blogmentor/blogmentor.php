@@ -3,13 +3,15 @@
  * Plugin Name: Blogmentor - Blog Layouts for Elementor
  * Description: Showcase WordPress posts in beautiful ways with Elementor page builder.
  * Plugin URI: https://wordpress.org/plugins/blogmentor/
- * Version: 1.6.1
+ * Version: 2.0
  * Requires at least: 4.4
  * Requires PHP: 7.4
+ * Tested up to: 7.1.2
  * Author: AuburnForest
  * Author URI: https://auburnforest.com
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Elementor tested up to: 4.2.4
  *
  * Text Domain: blogmentor
  * Domain Path: /languages/
@@ -29,7 +31,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 define( 'BLOGMENTOR_URL', plugins_url( '/', __FILE__ ) );  // Define Plugin URL.
 define( 'BLOGMENTOR_PATH', plugin_dir_path( __FILE__ ) );  // Define Plugin Directory Path.
-define( 'BLOGMENTOR_VERSION', '1.6.1' );  // Define Plugin Version.
+define( 'BLOGMENTOR_VERSION', '2.0' );  // Define Plugin Version.
+
+/**
+ * Minimum Elementor version: 3.5.0 introduced the elementor/widgets/register
+ * hook and Widgets_Manager::register() used below.
+ */
+define( 'BLOGMENTOR_MINIMUM_ELEMENTOR_VERSION', '3.5.0' );
 
 /**
  * Require files.
@@ -41,17 +49,30 @@ define( 'BLOGMENTOR_VERSION', '1.6.1' );  // Define Plugin Version.
 if ( ! function_exists( 'blogmentor_elements_widget_register' ) ) {
 
 	/**
-	 * Require the widget and helper function files.
+	 * Load the widget and helper function files, and register the widget.
+	 *
+	 * Hooked to elementor/widgets/register, which replaced the
+	 * elementor/widgets/widgets_registered hook (and register_widget_type())
+	 * deprecated in Elementor 3.5.
 	 *
 	 * @since 1.0.0
+	 * @since 2.0 Registers through Widgets_Manager::register().
+	 *
+	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
 	 */
-	function blogmentor_elements_widget_register() {
-		require_once BLOGMENTOR_PATH . 'includes/elements/blogmentor-blog-posts.php';
+	function blogmentor_elements_widget_register( $widgets_manager ) {
+		if ( ! defined( 'ELEMENTOR_VERSION' ) || ! version_compare( ELEMENTOR_VERSION, BLOGMENTOR_MINIMUM_ELEMENTOR_VERSION, '>=' ) ) {
+			return;
+		}
+
 		require_once BLOGMENTOR_PATH . 'includes/blogmentor-functions.php';
+		require_once BLOGMENTOR_PATH . 'includes/elements/blogmentor-blog-posts.php';
+
+		$widgets_manager->register( new \Elementor\Blogmentor_Blog_Posts_Widget() );
 	}
 
 }
-add_action( 'elementor/widgets/widgets_registered', 'blogmentor_elements_widget_register' );
+add_action( 'elementor/widgets/register', 'blogmentor_elements_widget_register' );
 
 /**
  * Blogmentor Elementor Elements Register Categories.
@@ -129,8 +150,7 @@ if ( ! function_exists( 'blogmentor_elements_plugin_load' ) ) {
 			add_action( 'admin_notices', 'blogmentor_elements_widget_fail_load' );
 			return;
 		}
-		$elementor_version_required = '1.1.2';
-		if ( ! version_compare( ELEMENTOR_VERSION, $elementor_version_required, '>=' ) ) {
+		if ( ! version_compare( ELEMENTOR_VERSION, BLOGMENTOR_MINIMUM_ELEMENTOR_VERSION, '>=' ) ) {
 			add_action( 'admin_notices', 'blogmentor_elements_elementor_update_notice' );
 			return;
 		}
@@ -150,7 +170,7 @@ if ( ! function_exists( 'blogmentor_elements_widget_fail_load' ) ) {
 	 * @since 1.0.0
 	 */
 	function blogmentor_elements_widget_fail_load() {
-		$screen = get_current_screen();
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 		if ( isset( $screen->parent_file ) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id ) {
 			return;
 		}
@@ -161,10 +181,10 @@ if ( ! function_exists( 'blogmentor_elements_widget_fail_load' ) ) {
 			if ( ! current_user_can( 'activate_plugins' ) ) {
 				return;
 			}
-			$activation_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin );
+			$activation_url = wp_nonce_url( admin_url( 'plugins.php?action=activate&plugin=' . rawurlencode( $plugin ) . '&plugin_status=all&paged=1' ), 'activate-plugin_' . $plugin );
 
-			$message  = '<p><strong>' . __( 'Blogmentor', 'blogmentor' ) . '</strong>' . __( ' widgets not working because you need to activate the Elementor plugin.', 'blogmentor' ) . '</p>';
-			$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $activation_url, __( 'Activate Elementor Now', 'blogmentor' ) ) . '</p>';
+			$message  = '<p><strong>' . esc_html__( 'Blogmentor', 'blogmentor' ) . '</strong>' . esc_html__( ' widgets not working because you need to activate the Elementor plugin.', 'blogmentor' ) . '</p>';
+			$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', esc_url( $activation_url ), esc_html__( 'Activate Elementor Now', 'blogmentor' ) ) . '</p>';
 		} else {
 			if ( ! current_user_can( 'install_plugins' ) ) {
 				return;
@@ -172,11 +192,11 @@ if ( ! function_exists( 'blogmentor_elements_widget_fail_load' ) ) {
 
 			$install_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
 
-			$message  = '<p><strong>' . __( 'Blogmentor', 'blogmentor' ) . '</strong>' . __( ' widgets not working because you need to install the Elemenor plugin', 'blogmentor' ) . '</p>';
-			$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $install_url, __( 'Install Elementor Now', 'blogmentor' ) ) . '</p>';
+			$message  = '<p><strong>' . esc_html__( 'Blogmentor', 'blogmentor' ) . '</strong>' . esc_html__( ' widgets not working because you need to install the Elementor plugin', 'blogmentor' ) . '</p>';
+			$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', esc_url( $install_url ), esc_html__( 'Install Elementor Now', 'blogmentor' ) ) . '</p>';
 		}
 
-		echo '<div class="error"><p>' . wp_kses_post( $message ) . '</p></div>';
+		echo '<div class="notice notice-error">' . wp_kses_post( $message ) . '</div>';
 	}
 
 }
@@ -199,9 +219,9 @@ if ( ! function_exists( 'blogmentor_elements_elementor_update_notice' ) ) {
 		$file_path = 'elementor/elementor.php';
 
 		$upgrade_link = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file_path, 'upgrade-plugin_' . $file_path );
-		$message      = '<p><strong>' . __( 'Blogmentor', 'blogmentor' ) . '</strong>' . __( 'widgets not working because you are using an old version of Elementor.', 'blogmentor' ) . '</p>';
-		$message     .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $upgrade_link, __( 'Update Elementor Now', 'blogmentor' ) ) . '</p>';
-		echo '<div class="error">' . wp_kses_post( $message ) . '</div>';
+		$message      = '<p><strong>' . esc_html__( 'Blogmentor', 'blogmentor' ) . '</strong>' . esc_html__( ' widgets not working because you are using an old version of Elementor.', 'blogmentor' ) . '</p>';
+		$message     .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', esc_url( $upgrade_link ), esc_html__( 'Update Elementor Now', 'blogmentor' ) ) . '</p>';
+		echo '<div class="notice notice-error">' . wp_kses_post( $message ) . '</div>';
 	}
 
 }
@@ -219,6 +239,9 @@ if ( ! function_exists( 'blogmentor_elements_elementor_installed' ) ) {
 	 * @return bool True if Elementor is installed, false otherwise.
 	 */
 	function blogmentor_elements_elementor_installed() {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
 
 		$file_path         = 'elementor/elementor.php';
 		$installed_plugins = get_plugins();
@@ -240,7 +263,7 @@ if ( ! function_exists( 'blogmentor_elements_plugin_activation' ) ) {
 	 * @since 1.0.0
 	 */
 	function blogmentor_elements_plugin_activation() {
-		add_option( 'blogmentor_activated_time', time(), '', 'no' );
+		add_option( 'blogmentor_activated_time', time(), '', false );
 	}
 
 }
@@ -261,7 +284,7 @@ if ( ! function_exists( 'blogmentor_elements_reviews_notice' ) ) {
 			return;
 		}
 
-		$activated_time = get_option( 'blogmentor_activated_time' );
+		$activated_time = (int) get_option( 'blogmentor_activated_time' );
 		if ( ! $activated_time || ( time() - $activated_time ) < 7 * DAY_IN_SECONDS ) {
 			return;
 		}
@@ -273,9 +296,9 @@ if ( ! function_exists( 'blogmentor_elements_reviews_notice' ) ) {
 				<?php
 				printf(
 					/* translators: 1: Plugin name. 2: Link to leave a review. */
-					esc_html__( 'Hi, you have been using %1$s for a week now. I would really appreciate it if you could give the plugin a five star rating. %2$s', 'blogmentor' ),
+					esc_html__( 'Hi, you have been using %1$s for a week now. If it has been useful, I would really appreciate it if you could leave a review. %2$s', 'blogmentor' ),
 					'<strong>' . esc_html__( 'Blogmentor', 'blogmentor' ) . '</strong>',
-					'<a href="' . esc_url( 'https://wordpress.org/support/plugin/blogmentor/reviews/#new-post' ) . '" target="_blank" rel="noopener noreferrer" class="rating-link"><strong>' . esc_html__( 'Okay, you deserve it', 'blogmentor' ) . '</strong></a>'
+					'<a href="' . esc_url( 'https://wordpress.org/support/plugin/blogmentor/reviews/#new-post' ) . '" target="_blank" rel="noopener noreferrer" class="rating-link"><strong>' . esc_html__( 'Leave a review', 'blogmentor' ) . '</strong></a>'
 				);
 				?>
 			</p>

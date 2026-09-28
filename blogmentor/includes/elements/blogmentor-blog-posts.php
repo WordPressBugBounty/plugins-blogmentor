@@ -1010,7 +1010,7 @@ class Blogmentor_Blog_Posts_Widget extends Widget_Base {
 			}
 		}
 
-		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		$paged = blogmentor_get_current_page();
 		$args  = array(
 			'post_type'      => 'post',
 			'posts_per_page' => $settings['bm_number_of_posts'],
@@ -1088,5 +1088,3 @@ class Blogmentor_Blog_Posts_Widget extends Widget_Base {
 		endif;
 	}
 }
-
-Plugin::instance()->widgets_manager->register_widget_type( new Blogmentor_Blog_Posts_Widget() );
